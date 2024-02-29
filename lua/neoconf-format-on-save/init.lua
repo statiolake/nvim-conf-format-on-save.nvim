@@ -12,14 +12,24 @@ end
 local disable_temporary = false
 
 local function check_should_run()
+  local bufnr = 0
+  local filetype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+
   if disable_temporary then
     return false
+  end
+
+  -- ファイルタイプごとの設定があればそれを使う
+  local l_enabled =
+    neoconf.get(string.format('format-on-save.%s.enable', filetype))
+  if l_enabled ~= nil then
+    return l_enabled
   end
 
   -- 型アノテーション的にはテーブルを期待するようだが、今回欲しいのはbooleanな
   -- ので無視する
   ---@diagnostic disable-next-line: param-type-mismatch
-  return neoconf.get('format-on-save.enable', true)
+  return neoconf.get('format-on-save._.enable', true)
 end
 
 ---@param is_auto boolean
