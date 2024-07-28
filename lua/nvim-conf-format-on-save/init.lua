@@ -1,8 +1,8 @@
-local config = require 'neoconf-format-on-save.config'
+local config = require 'nvim-conf-format-on-save.config'
 
-local fix = require 'neoconf-format-on-save.fix'
-local format = require 'neoconf-format-on-save.format'
-local view = require 'neoconf-format-on-save.view'
+local fix = require 'nvim-conf-format-on-save.fix'
+local format = require 'nvim-conf-format-on-save.format'
+local view = require 'nvim-conf-format-on-save.view'
 
 local function break_undo()
   local keyseq =
